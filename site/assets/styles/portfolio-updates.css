@@ -70,12 +70,11 @@
 .portfolio-additions article + article { margin-top: 40px; }
 #national-conferences { padding-bottom: 0; }
 #national-conferences h2 { margin-bottom: 0; }
-/* Match the original national conference entry to the other conference entries. */
-#z0ZDz3 h3,
-#z0ZDz3 p {
+/* Use identical text color and alignment for every conference entry. */
+.portfolio-additions h3,
+.portfolio-additions p {
   color: #000;
   text-align: left;
-  white-space: normal;
 }
 @media (max-width: 920px) {
   .portfolio-additions h2 { font-size: 24px; }

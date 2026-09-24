@@ -34,7 +34,6 @@ PROFILES = [
     ('About Me', 'https://about.me/gazifahad'),
     ('Loop', 'https://loop.frontiersin.org/people/3453332/'),
     ('Canvas', 'https://canvas.instructure.com/eportfolios/4019039'),
-    ('WhatsApp', 'http://wa.me/+8801538189339'),
     ('Tumblr', 'https://www.tumblr.com/blog/gazi-fahad'),
 ]
 
@@ -62,15 +61,12 @@ icons = existing_icons + [
     monogram('me', 13),
     svg('<path d="M9 7H7a5 5 0 0 0 0 10h2l6-10h2a5 5 0 0 1 0 10h-2L9 7Z" fill="none" stroke="currentColor" stroke-width="2.5"/>'),
     svg('<circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>' + ''.join(f'<circle cx="12" cy="3" r="2" transform="rotate({a} 12 12)"/>' for a in range(0,360,45))),
-    svg('<path d="M12 2a10 10 0 0 0-8.7 15L2 22l5.2-1.3A10 10 0 1 0 12 2Zm0 2a8 8 0 1 1-4.3 14.7l-.4-.2-2.5.7.7-2.5-.3-.4A8 8 0 0 1 12 4Zm-3 3c-.5-.4-1.5.1-1.7 1-.8 3.4 3.3 7.6 6.7 8 .9.1 2-.8 2-1.6l-2.6-1.3-1 1c-1.6-.6-2.6-1.6-3.2-3l1-1z"/>'),
     monogram('t', 23),
 ]
 
-def social(match, exclude_whatsapp=False):
+def social(match):
     links = []
     for (label, href), icon in zip(PROFILES, icons):
-        if exclude_whatsapp and label == 'WhatsApp':
-            continue
         if 'aria-hidden' not in icon:
             icon = icon.replace('<svg ', '<svg aria-hidden="true" focusable="false" ', 1)
         links.append(f'<a class="social-icons__link" data-v-7a627136="" href="{escape(href, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="{label}" title="{label}">{icon}</a>')
@@ -105,7 +101,7 @@ conferences = section('International Conferences', conference_body, 'internation
 for path in SITE.rglob('*.html'):
     page = path.read_text(encoding='utf-8')
     page = re.sub(r'<!-- portfolio-additions:start -->.*?<!-- portfolio-additions:end -->', '', page, flags=re.S)
-    page = re.sub(social_pattern, lambda match: social(match, path.parent.name == 'about'), page, flags=re.S)
+    page = re.sub(social_pattern, social, page, flags=re.S)
     if '/assets/styles/portfolio-updates.css' not in page:
         page = page.replace('</head>', '<link rel="stylesheet" href="/assets/styles/portfolio-updates.css"></head>')
     relative = path.relative_to(SITE).as_posix()
