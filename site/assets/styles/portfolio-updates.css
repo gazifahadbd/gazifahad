@@ -17,6 +17,8 @@
 }
 @media (min-width: 921px) {
   .page .block-header-layout-desktop {
+    padding-top: 10px;
+    padding-bottom: 10px;
     grid-template-columns: min-content 1fr min-content;
     grid-template-rows: auto auto;
   }
@@ -68,6 +70,13 @@
 .portfolio-additions article + article { margin-top: 40px; }
 #national-conferences { padding-bottom: 0; }
 #national-conferences h2 { margin-bottom: 0; }
+/* Match the original national conference entry to the other conference entries. */
+#z0ZDz3 h3,
+#z0ZDz3 p {
+  color: #000;
+  text-align: left;
+  white-space: normal;
+}
 @media (max-width: 920px) {
   .portfolio-additions h2 { font-size: 24px; }
   .portfolio-additions h3 { font-size: 20px; }

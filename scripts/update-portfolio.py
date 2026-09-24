@@ -66,9 +66,11 @@ icons = existing_icons + [
     monogram('t', 23),
 ]
 
-def social(match):
+def social(match, exclude_whatsapp=False):
     links = []
     for (label, href), icon in zip(PROFILES, icons):
+        if exclude_whatsapp and label == 'WhatsApp':
+            continue
         if 'aria-hidden' not in icon:
             icon = icon.replace('<svg ', '<svg aria-hidden="true" focusable="false" ', 1)
         links.append(f'<a class="social-icons__link" data-v-7a627136="" href="{escape(href, quote=True)}" target="_blank" rel="noopener noreferrer" aria-label="{label}" title="{label}">{icon}</a>')
@@ -103,13 +105,13 @@ conferences = section('International Conferences', conference_body, 'internation
 for path in SITE.rglob('*.html'):
     page = path.read_text(encoding='utf-8')
     page = re.sub(r'<!-- portfolio-additions:start -->.*?<!-- portfolio-additions:end -->', '', page, flags=re.S)
-    page = re.sub(social_pattern, social, page, flags=re.S)
+    page = re.sub(social_pattern, lambda match: social(match, path.parent.name == 'about'), page, flags=re.S)
     if '/assets/styles/portfolio-updates.css' not in page:
         page = page.replace('</head>', '<link rel="stylesheet" href="/assets/styles/portfolio-updates.css"></head>')
     relative = path.relative_to(SITE).as_posix()
     if relative in ('research/index.html', 'research-gazi-fahad/index.html'):
-        # Add before dissertations while retaining every original research entry.
-        anchor = next(m.start() for m in re.finditer(r'<section\b.*?</section>', page, re.S) if '>Dissertations<' in m.group())
+        # Keep the introduction, dissertations, and interests above the additions.
+        anchor = next(m.start() for m in re.finditer(r'<section\b.*?</section>', page, re.S) if 'id="in-press"' in m.group())
         page = page[:anchor] + mark(funding + publications + review) + page[anchor:]
     elif relative == 'index.html':
         research_section = next(m for m in re.finditer(r'<section\b.*?</section>', page, re.S) if re.search(r'>Research</', m.group()))
