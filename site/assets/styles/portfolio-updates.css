@@ -1,0 +1,76 @@
+/* Small extensions to the original layout and local Roboto Slab typography. */
+.page .social-icons {
+  flex-wrap: wrap;
+  gap: 6px;
+  height: auto !important;
+}
+.page .social-icons .social-icons__link {
+  padding: 6px;
+  flex: 0 0 auto;
+  min-width: 32px;
+  min-height: 32px;
+}
+.page .social-icons__link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+@media (min-width: 921px) {
+  .page .block-header-layout-desktop {
+    grid-template-columns: min-content 1fr min-content;
+    grid-template-rows: auto auto;
+  }
+  .page .block-header-layout-desktop > .block-header__logo { grid-area: 1 / 1; }
+  .page .block-header-layout-desktop > .block-header__nav { grid-area: 1 / 2; }
+  .page .block-header-layout-desktop > .block-header__button { grid-area: 1 / 3; }
+  .page .block-header-layout-desktop > .block-header__social-icons {
+    grid-area: 2 / 1 / 3 / -1;
+    justify-content: center;
+    margin: 0;
+    padding: 4px 0;
+  }
+}
+.page .block-header-layout-mobile .social-icons {
+  justify-content: center;
+  max-width: 100%;
+}
+/* The captured footer used a fixed 19px grid row for six icons. */
+.page #zZBPeT > .block-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  min-height: 80px;
+}
+.page #zZBPeT > .block-layout > .layout-element {
+  position: relative;
+  width: auto;
+  height: auto;
+  min-width: 0;
+}
+.page #zZBPeT .layout-element:has(.social-icons) { flex: 1 1 640px; order: 1; }
+.page #zZBPeT .layout-element:has(.grid-button) { order: 2; }
+.page #zZBPeT .social-icons { justify-content: center; }
+.portfolio-additions {
+  background: #fff;
+  color: #000;
+  padding: 32px 16px;
+  font-family: var(--font-secondary, 'Roboto Slab', serif);
+}
+.portfolio-additions__inner { max-width: 1192px; margin: 0 auto; }
+.portfolio-additions h2,
+.portfolio-additions h3,
+.portfolio-additions p { font-family: inherit; text-transform: none; letter-spacing: normal; }
+.portfolio-additions h2 { color: rgb(130, 0, 0); font-size: 32px; font-weight: 700; line-height: 1.3; margin: 0 0 32px; }
+.portfolio-additions h3 { font-size: 24px; font-weight: 700; line-height: 1.3; margin: 0 0 16px; }
+.portfolio-additions p { font-size: 16px; font-weight: 400; line-height: 1.5; margin: 0 0 16px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.portfolio-additions article + article { margin-top: 40px; }
+#national-conferences { padding-bottom: 0; }
+#national-conferences h2 { margin-bottom: 0; }
+@media (max-width: 920px) {
+  .portfolio-additions h2 { font-size: 24px; }
+  .portfolio-additions h3 { font-size: 20px; }
+  .page #zZBPeT > .block-layout { justify-content: center; }
+  .page #zZBPeT .layout-element:has(.social-icons) { flex-basis: 100%; }
+}
