@@ -84,3 +84,10 @@
   .page #zZBPeT > .block-layout { justify-content: center; }
   .page #zZBPeT .layout-element:has(.social-icons) { flex-basis: 100%; }
 }
+nav ul li ul li a,
+.dropdown-menu a,
+.sub-menu a {
+    white-space: nowrap !important;
+    text-align: left !important;
+    display: block !important;
+}
