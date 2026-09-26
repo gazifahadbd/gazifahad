@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'dist');
-const basePath = process.env.PAGES_BASE_PATH ?? '/gazifahad';
+const basePath = process.env.PAGES_BASE_PATH ?? '/fahad';
 if (basePath && !/^\/[a-zA-Z0-9_/-]*$/.test(basePath)) {
   throw new Error('PAGES_BASE_PATH must be empty or a URL path starting with /.');
 }
